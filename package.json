@@ -1,0 +1,22 @@
+{
+  "name": "evolutivesms",
+  "version": "1.0.0",
+  "description": "An evolutive api to send sms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skatos-ux/evolutivesms.git"
+  },
+  "keywords": [
+    "SMS"
+  ],
+  "author": "skatos-ux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skatos-ux/evolutivesms/issues"
+  },
+  "homepage": "https://github.com/skatos-ux/evolutivesms#readme"
+}
