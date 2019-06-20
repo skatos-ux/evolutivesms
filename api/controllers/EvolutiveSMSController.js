@@ -22,6 +22,7 @@ exports.create_a_message = function(req, res) {
       res.send(err);
     res.json(task);
   });
+
 };
 
 
@@ -44,11 +45,11 @@ exports.update_a_message = function(req, res) {
 
 
 exports.delete_a_message = function(req, res) {
-  Send.remove({
-    _id: req.params.messageId
+  Send.deleteOne({
+    _id: req.params.sendId
   }, function(err, task) {
     if (err)
       res.send(err);
-    res.json({ message: 'Task successfully deleted' });
+    res.json({ message: 'Message successfully deleted' });
   });
 };
