@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(app) {
-  var EvolutiveSMS = require('../controllers/todoListController');
+  var EvolutiveSMS = require('../controllers/EvolutiveSMSController');
 
   app.route('/send')
     .get(EvolutiveSMS.list_all_messages)

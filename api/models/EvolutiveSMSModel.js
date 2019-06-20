@@ -6,19 +6,19 @@ var Schema = mongoose.Schema;
 var SendSchema = new Schema({
   login: {
     type: String,
-    required: 'Kindly enter the name of the task'
+    required: 'No login entered'
   },
   password: {
     type: String,
-    required: 'Kindly enter the name of the task'
+    required: 'No password entered'
   },
   to: {
     type: String,
-    required: 'Kindly enter the name of the task'
+    required: 'No phone number entered'
   },
   message: {
     type: String,
-    required: 'Kindly enter the name of the task'
+    required: 'No message entered'
   },
   Created_date: {
     type: Date,
@@ -26,4 +26,4 @@ var SendSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Send', TaskSchema);
+module.exports = mongoose.model('Send', SendSchema);
