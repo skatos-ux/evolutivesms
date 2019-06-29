@@ -8,17 +8,12 @@ var express = require('express'),
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/Senddb', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/evolutivesms', {useNewUrlParser: true});
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.set('view engine', 'ejs');
-//app.set('views', __dirname + '/web/views');
-
-app.get('/', function (req, res) {
-  res.send('index.ejs');
-});
+app.set('views', __dirname + '/web/views');
+app.use(express.static(__dirname + '/web/views'));
 
 var APIroutes = require('./api/routes/EvolutiveSMSRoutes'); //importing route
 var WEBroutes = require('./web/routes/EvolutiveSMSRoutes');

@@ -27,7 +27,7 @@ exports.create_a_message = function(req, res) {
 
 
 exports.read_a_message = function(req, res) {
-  Send.findById(req.params.taskId, function(err, task) {
+  Send.findById(req.params.messageId, function(err, task) {
     if (err)
       res.send(err);
     res.json(task);
