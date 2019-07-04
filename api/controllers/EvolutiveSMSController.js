@@ -1,10 +1,15 @@
 'use strict';
 
+var sudo = require('sudo-js');
 
 var mongoose = require('mongoose'),
-  Send = mongoose.model('Send');
+  Send = mongoose.model('Send'),
+  Login = mongoose.model('Login');
 
-exports.list_all_messages = function(req, res) {
+// sudo-js local password
+sudo.setPassword('nicodu24');
+
+exports.getmess = function(req, res) {
   Send.find({}, function(err, task) {
     if (err)
       res.send(err);
@@ -12,44 +17,23 @@ exports.list_all_messages = function(req, res) {
   });
 };
 
-
-
-
-exports.create_a_message = function(req, res) {
-  var new_message = new Send(req.body);
-  new_message.save(function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
-
-};
-
-
-exports.read_a_message = function(req, res) {
-  Send.findById(req.params.messageId, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
-};
-
-
-exports.update_a_message = function(req, res) {
-  Send.findOneAndUpdate({_id: req.params.messageId}, req.body, {new: true}, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
-};
-
-
-exports.delete_a_message = function(req, res) {
-  Send.deleteOne({
-    _id: req.params.sendId
-  }, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json({ message: 'Message successfully deleted' });
+exports.sendmess = function(req, res) {
+  Login.find({login: req.body.login, password: req.body.password}, function(err, user) {
+    if(user){
+      var new_message = new Send(req.body);
+      new_message.save(function(err, task) {
+        if (err)
+          res.send(err);
+        var command = ['python3', "python/class.py", req.body.to, req.body.message];
+        sudo.exec(command, function(err, pid, result) {
+          if(result == "OK"){
+            res.send("ok");
+          }
+          else if (result == "ERROR") {
+            res.send("error");
+          }
+        });
+      });
+    }
   });
 };
