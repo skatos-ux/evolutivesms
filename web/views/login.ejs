@@ -1,0 +1,25 @@
+<html lang="en">
+
+<% include static/header.html %>
+
+<body onload="preloadImage('img/background.jpg');">
+
+  <div class="wrapper">
+    <div style="max-width: 450px;" id="formContent">
+      <form method="post">
+        <div class="flexcolumn">
+          <% if(retry) { %>
+            <div class="alert alert-danger" role="alert">
+              Incorrect username or password
+            </div>
+          <% } %>
+          <input class='form-control' type="text" name="login" placeholder="Username">
+          <input class='form-control' type="password" name="password" placeholder="Password">
+          <input class='submitbutton' type="submit" name="submit" value="Se connecter">
+        </div>
+      </form>
+    </div>
+  </div>
+<% include static/footer.html %>
+</body>
+</html>
