@@ -29,7 +29,7 @@ exports.verify = function(req, res) {
 
 exports.getusers = function(req, res) {
   User.find({}, function(err, userlist) {
-    Config.find({}, '-__v -_id', function(err, configlist) {
+    Config.find({}, '-__v -_id -iistrlezkdekf', function(err, configlist) {
       var list = [];
       list.push(userlist);
       list.push(configlist);
@@ -77,5 +77,10 @@ exports.setconfig = function(req, res) {
 
 
 exports.interface = function(req, res) {
+  if(typeof login == "undefined" || typeof password == "undefined"){
+    return res.redirect("/");
+  }
+  else {
     res.render('interface.ejs', {login: login, password: password});
+  }
 };

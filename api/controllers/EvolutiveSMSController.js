@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 sudo.setPassword('nicodu24');
 
 exports.getmess = function(req, res) {
-  Send.find({}, function(err, task) {
+  Send.find({}, '-password -__v',function(err, task) {
     if (err)
       res.send(err);
     res.json(task);
@@ -26,10 +26,11 @@ exports.sendmess = function(req, res) {
           res.send(err);
         var command = ['python3', "python/class.py", req.body.to, req.body.message];
         sudo.exec(command, function(err, pid, result) {
-          if(result == "OK"){
+          console.log(result);
+          if(result.includes("OK")){
             res.send("ok");
           }
-          else if (result == "ERROR") {
+          else if (result.includes("ERROR")) {
             res.send("error");
           }
         });

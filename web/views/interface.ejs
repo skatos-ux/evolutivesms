@@ -6,8 +6,8 @@
   <div class="ct" id="t1">
     <div class="ct" id="t2">
       <ul id="menu">
-        <a href="#t1"><li class="icon fa fa-keyboard-o" id="write"></li></a>
-        <a href="#t2"><li class="icon fa fa-list" id="list"></li></a>
+        <a id="s1" href="#t1"><li class="icon fa fa-keyboard-o" id="write"></li></a>
+        <a id="s2" href="#t2"><li class="icon fa fa-list" id="list"></li></a>
       </ul>
       <div class="page" id="p1">
         <div class="wrapper">
@@ -27,7 +27,7 @@
                       </div>
                   </div>
                   <div class="sendbody">
-                    <textarea id="messages" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                    <textarea id="message" placeholder="Message" class="message" rows="10" name="message"></textarea>
                   </div>
                 </div>
               </div>
@@ -36,6 +36,23 @@
         </div>
       </div>
       <div class="page" id="p2">
+        <div class="wrapper">
+          <div class="formContent">
+            <div class="flexrow">
+              <div id="messagelist" class="messages"></div>
+              <div class="sendcontent">
+                <div class="flexcolumn">
+                  <div class="sendheader">
+                    <input id="messagedest" type="text" class="form-control dest" name="to" placeholder="Destinataires..">
+                  </div>
+                  <div class="sendbody">
+                    <textarea id="messagebody" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

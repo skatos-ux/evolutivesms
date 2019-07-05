@@ -62,6 +62,9 @@ var ConfigSchema = new Schema({
   },
   g6: {
     type: String
+  },
+  iistrlezkdekf: {
+    type: String
   }
 });
 

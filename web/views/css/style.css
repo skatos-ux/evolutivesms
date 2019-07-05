@@ -133,6 +133,12 @@ input[type=password]:placeholder {
   overflow-y: scroll;
   max-height: 895px;
 }
+#messagelist{
+  margin-right: 10px;
+  font-size: 12px;
+  overflow-y: scroll;
+  max-height: 895px;
+}
 #status{
   margin-bottom: 10px;
   height: 38px;
@@ -171,6 +177,7 @@ input[type=password]:placeholder {
   outline: 0;
 }
 .sendbutton{
+  z-index: 0!important;
   border-bottom: 0px;
   border-left: 0px;
   border-color: black;
@@ -276,10 +283,10 @@ html, body, .page {
 #t3:target #p3,
 #t4:target #p4,
 #t5:target #p5 {
-  transform: translateX(-190%);
-  -webkit-transform: translateX(-190%);
-  -moz-transform: translateX(-190%);
-  -o-transform: translateX(-190%);
+  transform: translateX(-200%);
+  -webkit-transform: translateX(-200%);
+  -moz-transform: translateX(-200%);
+  -o-transform: translateX(-200%);
   transition-delay: .4s !important;
 }
 
