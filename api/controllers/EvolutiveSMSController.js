@@ -18,7 +18,7 @@ exports.getmess = function(req, res) {
 };
 
 exports.sendmess = function(req, res) {
-  Login.find({login: req.body.login, password: req.body.password}, function(err, user) {
+  Login.findOne({login: req.body.login, password: req.body.password}, function(err, user) {
     if(user){
       var new_message = new Send(req.body);
       new_message.save(function(err, task) {
@@ -35,6 +35,9 @@ exports.sendmess = function(req, res) {
           }
         });
       });
+    }
+    else{
+      res.send("login error");
     }
   });
 };

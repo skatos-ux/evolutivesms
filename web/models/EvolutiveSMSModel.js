@@ -65,6 +65,9 @@ var ConfigSchema = new Schema({
   },
   iistrlezkdekf: {
     type: String
+  },
+  dkejfkthotjrr: {
+    type: String
   }
 });
 

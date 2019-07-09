@@ -8,8 +8,6 @@ var mongoose = require('mongoose'),
 var login;
 var password;
 
-
-
 exports.login = function(req, res) {
   res.render('login.ejs', {retry: false});
 };

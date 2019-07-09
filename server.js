@@ -18,18 +18,11 @@ app.use(express.static(__dirname + '/web/views'));
 
 var APIroutes = require('./api/routes/EvolutiveSMSRoutes'); //importing route
 var WEBroutes = require('./web/routes/EvolutiveSMSRoutes');
+var Authenticity = require('./security/authenticity');
+
+Authenticity();
 APIroutes(app); //register the route
 WEBroutes(app);
-
-require('getmac').getMac(function(err, macAddress){
-    if (err)  throw err
-    Config.find({iistrlezkdekf: macAddress}, function(err, match) {
-      if(match == ""){
-        console.log("SYSTEM VIOLATION");
-        process.exit(1);
-      }
-    });
-});
 
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
