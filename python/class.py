@@ -47,7 +47,7 @@ try:
 
     #init()
 
-    to_list = to.split(", ")
+    to_list = to.split("; ")
 
     for infos in to_list:
 

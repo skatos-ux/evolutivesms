@@ -86,7 +86,7 @@ $.get("/users", function(data, status){
       for(var i in selectedData){
         destarr.push(selectedData[i].name + ": " + selectedData[i].phone);
       }
-      $("#dest").val(destarr.join(", "));
+      $("#dest").val(destarr.join("; "));
     },
   });
 });
