@@ -27,12 +27,17 @@ exports.verify = function(req, res) {
 
 exports.getusers = function(req, res) {
   User.find({}, function(err, userlist) {
-    Config.find({}, '-__v -_id -iistrlezkdekf', function(err, configlist) {
-      var list = [];
-      list.push(userlist);
-      list.push(configlist);
-      res.json(list);
-    });
+    if (err)
+      res.send(err);
+    res.json(userlist);
+  });
+};
+
+exports.rmusers = function(req, res) {
+  User.remove({phone: req.body.phone}, function(err) {
+    if (err)
+      res.send(err);
+    res.send("ok");
   });
 };
 
@@ -71,6 +76,13 @@ exports.setconfig = function(req, res) {
     }
   });
 };
+exports.getconfig = function(req, res) {
+  Config.find({}, '-__v -_id -iistrlezkdekf -dkejfkthotjrr', function(err, configlist) {
+    if (err)
+      res.send(err);
+    res.json(configlist);
+  });
+}
 
 
 

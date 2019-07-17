@@ -1,8 +1,3 @@
-function preloadImage(url){
-    var img=new Image();
-    img.src=url;
-}
-
 function send(){
 
   var r_ok = "<div id='status' class='alert alert-success "+ ($("#status").length + 1) +"' role='alert'>Les SMS sont en cours d'envoi<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"

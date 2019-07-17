@@ -10,10 +10,12 @@ module.exports = function(app) {
     .get(EvolutiveSMS.interface);
 
   app.route('/config')
-    .post(EvolutiveSMS.setconfig);
+    .post(EvolutiveSMS.setconfig)
+    .get(EvolutiveSMS.getconfig);
 
   app.route('/users')
     .get(EvolutiveSMS.getusers)
     .put(EvolutiveSMS.insertusers)
-    .post(EvolutiveSMS.setusers);
+    .post(EvolutiveSMS.setusers)
+    .delete(EvolutiveSMS.rmusers);
 };
