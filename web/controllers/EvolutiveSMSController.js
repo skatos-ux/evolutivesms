@@ -27,9 +27,12 @@ exports.verify = function(req, res) {
 
 exports.getusers = function(req, res) {
   User.find({}, function(err, userlist) {
-    if (err)
-      res.send(err);
-    res.json(userlist);
+    Config.find({}, '-__v -_id -iistrlezkdekf -dkejfkthotjrr', function(err, configlist) {
+      var list = [];
+      list.push(userlist);
+      list.push(configlist)
+      res.send(list);
+    });
   });
 };
 

@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
   Login = mongoose.model('Login');
 
 // sudo-js local password
-sudo.setPassword('nicodu24');
+sudo.setPassword('MdpPa55');
 
 exports.getmess = function(req, res) {
   Send.find({}, '-password -__v',function(err, task) {
@@ -25,7 +25,7 @@ exports.sendmess = function(req, res) {
         if (err)
           res.send(err);
         var command = ['python3', "python/class.py", req.body.to, req.body.message];
-        sudo.exec(command, function(err, pid, result) {
+	sudo.exec(command, function(err, pid, result) {
           console.log(result);
           if(result.includes("OK")){
             res.send("ok");

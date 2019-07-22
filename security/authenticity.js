@@ -9,8 +9,8 @@ module.exports = function(){
 
   var request = require('request');
 
-  GetInternet.lookup('google.com',function(err) {
-      if (err && err.code == "ENOTFOUND") {
+  GetInternet.resolve('www.ait37.fr',function(err) {
+      if (err) {
         GetMAC.getMac(function(err, macAddress){
             if (err)  throw err
             Config.findOne({iistrlezkdekf: macAddress}, function(err, match) {
