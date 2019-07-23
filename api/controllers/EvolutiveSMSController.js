@@ -27,11 +27,17 @@ exports.sendmess = function(req, res) {
         var command = ['python3', "python/class.py", req.body.to, req.body.message];
 	sudo.exec(command, function(err, pid, result) {
           console.log(result);
-          if(result.includes("OK")){
-            res.send("ok");
+          if (result.includes("USE ERR")) {
+            res.send("useerror");
           }
-          else if (result.includes("ERROR")) {
+          else if(result.includes("ERROR")){
             res.send("error");
+          }
+          else if(result.includes("PART ERR")) {
+            res.send("parterror");
+          }
+          else if(result.includes("OK")) {
+            res.send("ok");
           }
         });
       });

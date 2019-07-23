@@ -1,6 +1,8 @@
 function send(){
 
   var r_ok = "<div id='status' class='alert alert-success "+ ($("#status").length + 1) +"' role='alert'>Les SMS sont en cours d'envoi<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
+  var r_parterror = "<div id='status' class='alert alert-warning "+ ($("#status").length + 1) +"' role='alert'>Un problême mineur à été repéré pendant l'envoi<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
+  var r_useerror = "<div id='status' class='alert alert-danger "+ ($("#status").length + 1) +"' role='alert'>Un autre envoi de sms est en cours veuillez réessayer plus tard<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
   var r_error = "<div id='status' class='alert alert-danger "+ ($("#status").length + 1) +"' role='alert'>Un problême a été repéré pendant l'envoi<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
   var r_miss ="<div id='status' class='alert alert-danger "+ ($("#status").length + 1) +"' role='alert'>Pas de destinataires ou de message<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
   var r_unknown = "<div id='status' class='alert alert-danger "+ ($("#status").length + 1) +"' role='alert'>Un problème inattendu à été rencontré<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
@@ -18,27 +20,30 @@ function send(){
   }
   else {
     $("#send").html("Envoi.. &nbsp; <i class='fas fa-spinner fa-pulse'></i>");
-    setTimeout(function() {
-      $("#send").html("Envoyer &nbsp; <i class='fas fa-paper-plane'></i>");
-
-      $.ajax({ url: '/send',
-               dataType: 'text',
-               type: 'POST',
-               contentType: 'application/x-www-form-urlencoded',
-               data: 'login='+ login + '&password=' + password + '&to=' + to + '&message=' + message,
-               success: function(result) {
-                 if(result == "ok"){
-                   $('.wrapper').prepend(r_ok);
-                 }
-                 else if (result == "error") {
-                   $('.wrapper').prepend(r_error);
-                 }
-                 else{
-                   $('.wrapper').prepend(r_unknown);
-                 }
+    $.ajax({ url: '/send',
+             dataType: 'text',
+             type: 'POST',
+             contentType: 'application/x-www-form-urlencoded',
+             data: 'login='+ login + '&password=' + password + '&to=' + to + '&message=' + message,
+             success: function(result) {
+               $("#send").html("Envoyer &nbsp; <i class='fas fa-paper-plane'></i>");
+               if(result == "ok"){
+                 $('.wrapper').prepend(r_ok);
                }
+               else if (result == "error") {
+                 $('.wrapper').prepend(r_error);
+               }
+               else if (result == "parterror") {
+                 $('.wrapper').prepend(r_parterror);
+               }
+               else if (result == "useerror") {
+                 $('.wrapper').prepend(r_useerror);
+               }
+               else{
+                 $('.wrapper').prepend(r_unknown);
+               }
+             }
       });
-    }, 2000);
   }
 }
 
@@ -82,6 +87,12 @@ $.get("/users", function(data, status){
         destarr.push(selectedData[i].name + ": " + selectedData[i].phone);
       }
       $("#dest").val(destarr.join("; "));
+    },
+    rowContext:function(e, row){
+    //e - the click event object
+    //row - row component
+
+    e.preventDefault(); // prevent the browsers default context menu form appearing.
     },
   });
 });
