@@ -58,7 +58,7 @@ try:
 
     #init()
 
-    to_list = to.split("; ")
+    to_list = to.split(";")
 
     for infos in to_list:
 
@@ -82,6 +82,6 @@ try:
 
 
 except:
-    logging.error(getdate() + " [FATAL ERROR]")
+    logging.error(getdate() + " [FATAL ERROR]: " + str(sys.exc_info()))
     error = to.split(lastnum,1)[1]
     print("ERROR : " + error)

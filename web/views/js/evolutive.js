@@ -82,7 +82,7 @@ function tableload(){
         for(var i in selectedData){
           destarr.push(selectedData[i].name + ": " + selectedData[i].phone);
         }
-        $("#dest").val(destarr.join("; "));
+        $("#dest").val(destarr.join(";"));
       },
     });
   });
@@ -180,7 +180,7 @@ $.contextMenu({
         if(key == 'suppr'){
           var to_delete_phone = "";
           var to_delete = $('#dest').val();
-          var to_delete_user = to_delete.split("; ");
+          var to_delete_user = to_delete.split(";");
           for (var i = 0; i < to_delete_user.length; i++) {
             var to_delete_infos = to_delete_user[i].split(': ');
             to_delete_phone += to_delete_infos[1] +"; ";
