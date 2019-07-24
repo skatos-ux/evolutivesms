@@ -9,11 +9,14 @@ import logging
 
 logging.basicConfig(filename='app.log',level=logging.INFO)
 
+parterror = ""
+error = ""
+lastname = ""
 
 def getdate():
     return str(datetime.datetime.now())
 
-ser = serial.Serial(port='/dev/ttyAMA0', baudrate=9600, timeout=1, rtscts=0) #COM4
+ser = serial.Serial(port='/dev/ttyAMA0', baudrate=9600, timeout=1.5, rtscts=0) #COM4
 
 try:
     fcntl.flock(ser.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -36,15 +39,16 @@ def parsegsm(mess, type):
 def init():
     parsegsm('AT+CMGD=1,4', "com")
 
-def GCUSend(num, message):
+def GCUSend(name, num, message):
+    global parterror
     if "99,99" in parsegsm('AT+CSQ', "com"):
         logging.error(getdate() + " [NO NETWORK]")
-        print("PART ERR")
+        parterror += name + "; "
     parsegsm('AT+CMEE=2', "com")
     parsegsm('AT+CMGS="' + num + '"', "com")
     if "+CMS ERROR" in parsegsm(message + "\x1a", "mess"):
         logging.error(getdate() + " [CMS ERROR]")
-        print("PART ERR")
+        parterror += name + "; "
 
 
 
@@ -59,16 +63,25 @@ try:
     for infos in to_list:
 
         if(":" in infos):
-            infos_list = infos.split(":  ")
+            infos_list = infos.split(": ")
             name = infos_list[0]
-            num = "+" + infos_list[1]
+            num = infos_list[1]
         else:
-            num = "+" + infos
+            num = infos
             name = infos
-        GCUSend(num, message)
 
+        GCUSend(name, num, message)
+        lastnum = num + "; ";
+
+        logging.info(getdate() + " Send attempt to : " + name)
+
+    if(parterror == ""):
         print("OK")
-        logging.info(getdate() + " Sent to : " + name)
+    else:
+        print("PART ERR : " + parterror)
+
+
 except:
     logging.error(getdate() + " [FATAL ERROR]")
-    print("ERROR")
+    error = to.split(lastnum,1)[1]
+    print("ERROR : " + error)

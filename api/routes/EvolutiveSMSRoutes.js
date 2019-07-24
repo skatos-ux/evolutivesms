@@ -4,6 +4,7 @@ module.exports = function(app) {
 
   app.route('/send')
     .get(EvolutiveSMS.getmess)
-    .post(EvolutiveSMS.sendmess);
+    .post(EvolutiveSMS.sendmess)
+    .delete(EvolutiveSMS.delmess);
 
 };

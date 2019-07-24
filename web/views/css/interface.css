@@ -131,6 +131,7 @@ input[type=password]:placeholder {
   font-size: 12px;
   overflow-y: scroll;
   max-height: 895px;
+  min-height: 239px;
 }
 #messagelist{
   margin-right: 10px;
@@ -184,6 +185,18 @@ input[type=password]:placeholder {
   background-color: #e9ecef;
   color: #0d0d0d;
   font-size: 12px;
+}
+.context-menu-list{
+  height: 40.38px;
+  width: 250px;
+}
+.modal-input{
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.modal-small{
+  font-size: 10px;
+  font-weight: bold;
 }
 .sendbutton:focus{
   box-shadow: none;

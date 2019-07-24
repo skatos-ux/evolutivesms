@@ -11,6 +11,35 @@
       </ul>
       <div class="page" id="p1">
         <div class="wrapper">
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Création de compte</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="flexcolumn">
+                    <input class="modal-input form-control" id="name" type="text" name="name" placeholder="*NOM Prénom">
+                    <input class="modal-input form-control" id="phone" type="text" name="phone" placeholder="*Numéro de Téléphone format: +33XXXXXXXXX, example: +33601010101">
+                    <input class="modal-input form-control" id="g1" type="text" name="g1" placeholder="*Groupement n°1, example: Siège social de Paris">
+                    <input class="modal-input form-control" id="g2" type="text" name="g2" placeholder="Groupement n°2, example: Comptabilité">
+                    <input class="modal-input form-control" id="g3" type="text" name="g3" placeholder="Groupement n°3, example: Gestion d'urgences">
+                    <input class="modal-input form-control" id="g4" type="text" name="g4" placeholder="Groupement n°4, example: Groupe nocturne">
+                    <input class="modal-input form-control" id="g5" type="text" name="g5" placeholder="Groupement n°5, example: Groupe nocture n°4">
+                    <input class="modal-input form-control" id="g6" type="text" name="g6" placeholder="Groupement n°6, example: Bureau n°407">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <small class="modal-small form-text text-muted">Les champs marqués d'un * sont obligatoires</small>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  <button id="submitmodal" onclick="submitmodal();" type="button" class="btn btn-primary">Créer le compte</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="formContent">
             <div class="flexrow">
               <div id="contact"></div>
@@ -47,6 +76,9 @@
                   </div>
                   <div class="sendbody">
                     <textarea id="messagebody" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                  </div>
+                  <div class="sendbody">
+                    <textarea id="commentaire" placeholder="Commentaire" class="message" rows="10" name="message"></textarea>
                   </div>
                 </div>
               </div>

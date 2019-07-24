@@ -20,6 +20,9 @@ var SendSchema = new Schema({
     type: String,
     required: 'No message entered'
   },
+  commentaire: {
+    type: String
+  },
   Created_date: {
     type: Date,
     default: Date.now

@@ -37,7 +37,7 @@ exports.getusers = function(req, res) {
 };
 
 exports.rmusers = function(req, res) {
-  User.remove({phone: req.body.phone}, function(err) {
+  User.deleteMany({ phone: { $in: req.body.phone.split("; ")}}, function(err) {
     if (err)
       res.send(err);
     res.send("ok");
