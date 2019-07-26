@@ -1,2 +1,2 @@
 # evolutivesms
-An evolutive sms api
+An evolutive sms api and web interface
