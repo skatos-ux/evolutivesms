@@ -26,7 +26,7 @@ exports.delmess = function(req, res) {
 };
 
 exports.sendmess = function(req, res) {
-  Login.findOne({login: req.body.login, password: req.body.password}, function(err, user) {
+  Login.findOne({login: 'admin', password: req.body.password}, function(err, user) {
     if(user){
       var command = ['python3', "python/class.py", req.body.to, req.body.message];
       sudo.exec(command, function(err, pid, result) {
@@ -51,6 +51,7 @@ exports.sendmess = function(req, res) {
           commentaire = "Tous les SMS ont été envoyés";
         }
         req.body.commentaire = commentaire;
+        req.body.login = "admin";
         var new_message = new Send(req.body);
         new_message.save(function(err, task) {
         });

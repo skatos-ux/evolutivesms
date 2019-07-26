@@ -8,7 +8,6 @@ function send(){
   var r_unknown = "<div id='status' class='alert alert-danger "+ ($("#status").length + 1) +"' role='alert'>Un problème inattendu à été rencontré<button id='rmstatus' class='rmstatus' type='button' onclick='rmstatus("+ ($("#status").length + 1) +");'><i class='fa fa-times' aria-hidden='true'></i></button></div>"
 
 
-  var login = $("#login").val();
   var password = $("#password").val();
   var to = $("#dest").val();
   var message = $("#message").val();
@@ -22,7 +21,7 @@ function send(){
              dataType: 'text',
              type: 'POST',
              contentType: 'application/x-www-form-urlencoded',
-             data: 'login='+ login + '&password=' + password + '&to=' + encodeURIComponent(to) + '&message=' + encodeURIComponent(message),
+             data: 'password=' + password + '&to=' + encodeURIComponent(to) + '&message=' + encodeURIComponent(message),
              success: function(result) {
                $("#send").html("Envoyer &nbsp; <i class='fas fa-paper-plane'></i>");
                if(result.includes("ok")){
@@ -201,29 +200,71 @@ $.contextMenu({
     }
 });
 
-$.contextMenu({
-    selector: '#messagelist',
-    callback: function(key, options) {
-        if(key == 'suppr'){
-          $.ajax({ url: '/send',
-                   dataType: 'text',
-                   type: 'DELETE',
-                   contentType: 'application/x-www-form-urlencoded',
-                   success: function(result) {
-                     table2load();
-                   }
-          });
-        }
-    },
-    items: {
-        "suppr": {name: "Supprimer l'historique", icon: "quit"}
-    }
-});
 
 function rmstatus(id){
   $("."+id).remove();
 }
 
+$("#s1").click(function() {
+  $.contextMenu('destroy');
+  $.contextMenu({
+      selector: '#contact',
+      callback: function(key, options) {
+          if(key == 'add'){
+            $('.modal-input').val('');
+            $('#exampleModal').modal('show');
+          }
+      },
+      items: {
+          "add": {name: "Ajouter", icon: "add"}
+      }
+  });
+  $.contextMenu({
+      selector: '.tabulator-selected',
+      callback: function(key, options) {
+          if(key == 'suppr'){
+            var to_delete_phone = "";
+            var to_delete = $('#dest').val();
+            var to_delete_user = to_delete.split(";");
+            for (var i = 0; i < to_delete_user.length; i++) {
+              var to_delete_infos = to_delete_user[i].split(': ');
+              to_delete_phone += to_delete_infos[1] +"; ";
+            }
+            $.ajax({ url: '/users',
+                     dataType: 'text',
+                     type: 'DELETE',
+                     contentType: 'application/x-www-form-urlencoded',
+                     data: 'phone=' + encodeURIComponent(to_delete_phone),
+                     success: function(result) {
+                       tableload();
+                     }
+            });
+          }
+      },
+      items: {
+          "suppr": {name: "Supprimer la séléction", icon: "quit"}
+      }
+  });
+});
 $("#s2").click(function() {
+  $.contextMenu('destroy');
+  $.contextMenu({
+      selector: '#messagelist',
+      callback: function(key, options) {
+          if(key == 'suppr'){
+            $.ajax({ url: '/send',
+                     dataType: 'text',
+                     type: 'DELETE',
+                     contentType: 'application/x-www-form-urlencoded',
+                     success: function(result) {
+                       table2load();
+                     }
+            });
+          }
+      },
+      items: {
+          "suppr": {name: "Supprimer l'historique", icon: "quit"}
+      }
+  });
   table2load();
 });

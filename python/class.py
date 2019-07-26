@@ -16,7 +16,7 @@ lastname = ""
 def getdate():
     return str(datetime.datetime.now())
 
-ser = serial.Serial(port='/dev/ttyAMA0', baudrate=9600, timeout=1.5, rtscts=0) #COM4
+ser = serial.Serial(port='/dev/ttyAMA0', baudrate=9600, timeout=1, rtscts=0) #COM4
 
 try:
     fcntl.flock(ser.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -31,9 +31,10 @@ def parsegsm(mess, type):
     ser.write(mess.encode())
     time.sleep(0.5)
     ret = []
+    line = ""
     msg = ser.readlines()
     for index, hardline in enumerate(msg):
-        line = hardline.decode('latin-1').replace('\r\n', '').replace('\n', '')
+        line += hardline.decode('latin-1').replace('\r\n', '').replace('\n', '')
     return line
 
 def init():
@@ -41,14 +42,17 @@ def init():
 
 def GCUSend(name, num, message):
     global parterror
-    if "99,99" in parsegsm('AT+CSQ', "com"):
-        logging.error(getdate() + " [NO NETWORK]")
+    result = parsegsm('AT+CSQ', "com")
+    if "99,99" in result:
+        logging.error(getdate() + " [NO NETWORK]: " +result)
         parterror += name + "; "
-    parsegsm('AT+CMEE=2', "com")
-    parsegsm('AT+CMGS="' + num + '"', "com")
-    if "+CMS ERROR" in parsegsm(message + "\x1a", "mess"):
-        logging.error(getdate() + " [CMS ERROR]")
-        parterror += name + "; "
+    else:
+        parsegsm('AT+CMEE=2', "com")
+        parsegsm('AT+CMGS="' + num + '"', "com")
+        result = parsegsm(message + "\x1a", "mess")
+        if "+CMS ERROR" in result:
+            logging.error(getdate() + " [CMS ERROR]: " +result)
+            parterror += name + "; "
 
 
 
@@ -70,10 +74,9 @@ try:
             num = infos
             name = infos
 
+        logging.info(getdate() + " Send attempt to : " + name)
         GCUSend(name, num, message)
         lastnum = num + "; ";
-
-        logging.info(getdate() + " Send attempt to : " + name)
 
     if(parterror == ""):
         print("OK")
