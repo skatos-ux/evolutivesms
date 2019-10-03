@@ -8,6 +8,10 @@ var LoginSchema = new Schema({
     type: String,
     required: 'No login entered'
   },
+  rank: {
+    type: String,
+    required: 'No rank entered'
+  },
   password: {
     type: String,
     required: 'No password entered'
@@ -61,6 +65,9 @@ var ConfigSchema = new Schema({
     type: String
   },
   g6: {
+    type: String
+  },
+  ajdizhdbzgoor: {
     type: String
   },
   iistrlezkdekf: {

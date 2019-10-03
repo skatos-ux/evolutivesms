@@ -148,6 +148,29 @@ input[type=password]:placeholder {
 .form{
   width: 100%;
 }
+
+.group-header{
+  width: 100%;
+  font-weight: bold;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #f8f9fa;
+}
+.group-body{
+  font-size: 13px;
+  padding-left: 50px;
+  background-color: #f8f9fa;
+}
+
+.group-item{
+  display: inline;
+  font-size: 13px;
+  width: auto;
+  margin-left: 2px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
 .rmstatus{
   margin-top: 2px;
   width: 9px;
@@ -281,20 +304,16 @@ html, body, .page {
   left: 0;
 }
 
-#p2, #p3, #p4, #p5 {
+#p2, #p3 {
   left: 200%;
 }
 
 #p1 { background: darkslateblue; }
 #p2 { background: tomato; }
-#p3 { background: rebeccapurple; }
-#p4 { background: gold; }
-#p5 { background: deeppink; }
+#p3 { background: green; }
 
 #t2:target #p2,
-#t3:target #p3,
-#t4:target #p4,
-#t5:target #p5 {
+#t3:target #p3 {
   transform: translateX(-200%);
   -webkit-transform: translateX(-200%);
   -moz-transform: translateX(-200%);
@@ -303,16 +322,12 @@ html, body, .page {
 }
 
 #t2:target #p1,
-#t3:target #p1,
-#t4:target #p1,
-#t5:target #p1{
+#t3:target #p1 {
   background: black;
 }
 
 #t2:target #p1 .icon,
-#t3:target #p1 .icon,
-#t4:target #p1 .icon,
-#t5:target #p1 .icon {
+#t3:target #p1 .icon {
   -webkit-filter: blur(3px);
 }
 
@@ -338,7 +353,22 @@ ul .icon:hover {
   transition-delay: .25s;
 }
 
+#t3:target ul .icon{
+  transform: scale(.6);
+  -webkit-transform: scale(.6);
+  -moz-transform: scale(.6);
+  -o-transform: scale(.6);
+  transition-delay: .25s;
+}
+
 #t2:target #list{
+  transform: scale(1.2) !important;
+  -webkit-transform: scale(1.2) !important;
+  -moz-transform: scale(1.2) !important;
+  -o-transform: scale(1.2) !important;
+}
+
+#t3:target #conf{
   transform: scale(1.2) !important;
   -webkit-transform: scale(1.2) !important;
   -moz-transform: scale(1.2) !important;
@@ -432,7 +462,7 @@ a:hover {
   transform: translateX(10%) !important;
 }
 
-#t2:target .page#p2 .icon{
+#t2:target .page#p2 #t3:target .page#p3 .icon{
   transform: translateX(0) !important;
   -webkit-transform: translateX(0) !important;
   -moz-transform: translateX(0) !important;

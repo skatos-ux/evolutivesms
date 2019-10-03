@@ -5,89 +5,153 @@
 <body>
   <div class="ct" id="t1">
     <div class="ct" id="t2">
-      <ul id="menu">
-        <a id="s1" href="#t1"><li class="icon fa fa-keyboard-o" id="write"></li></a>
-        <a id="s2" href="#t2"><li class="icon fa fa-list" id="list"></li></a>
-      </ul>
-      <div class="page" id="p1">
-        <div class="wrapper">
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Création de compte</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+      <% if(rank >= 2) { %>
+      <div class="ct" id="t3">
+      <% } %>
+        <ul <% if(rank >= 2) { %> style="height: 216px;" <% } %> id="menu">
+          <a id="s1" href="#t1"><li class="icon fa fa-keyboard-o" id="write"></li></a>
+          <a id="s2" href="#t2"><li class="icon fa fa-list" id="list"></li></a>
+          <% if(rank >= 2) { %>
+          <a id="s3" href="#t3"><li class="icon fa fa-cog" id="conf"></li></a>
+          <% } %>
+        </ul>
+        <div class="page" id="p1">
+          <div class="wrapper">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Création de compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="flexcolumn">
+                      <input class="modal-input form-control" id="name" type="text" name="name" placeholder="*NOM Prénom">
+                      <input class="modal-input form-control" id="phone" type="text" name="phone" placeholder="*Numéro de Téléphone format: +33XXXXXXXXX, example: +33601010101">
+                      <input class="modal-input form-control" id="g1" type="text" name="g1" placeholder="*Groupement n°1, example: Siège social de Paris">
+                      <input class="modal-input form-control" id="g2" type="text" name="g2" placeholder="Groupement n°2, example: Comptabilité">
+                      <input class="modal-input form-control" id="g3" type="text" name="g3" placeholder="Groupement n°3, example: Gestion d'urgences">
+                      <input class="modal-input form-control" id="g4" type="text" name="g4" placeholder="Groupement n°4, example: Groupe nocturne">
+                      <input class="modal-input form-control" id="g5" type="text" name="g5" placeholder="Groupement n°5, example: Groupe nocture n°4">
+                      <input class="modal-input form-control" id="g6" type="text" name="g6" placeholder="Groupement n°6, example: Bureau n°407">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <small class="modal-small form-text text-muted">Les champs marqués d'un * sont obligatoires</small>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button id="submitmodal" onclick="submitmodal();" type="button" class="btn btn-primary">Créer le compte</button>
+                  </div>
                 </div>
-                <div class="modal-body">
+              </div>
+            </div>
+            <div class="formContent">
+              <div class="flexrow">
+                <div id="contact"></div>
+                <div class="sendcontent">
                   <div class="flexcolumn">
-                    <input class="modal-input form-control" id="name" type="text" name="name" placeholder="*NOM Prénom">
-                    <input class="modal-input form-control" id="phone" type="text" name="phone" placeholder="*Numéro de Téléphone format: +33XXXXXXXXX, example: +33601010101">
-                    <input class="modal-input form-control" id="g1" type="text" name="g1" placeholder="*Groupement n°1, example: Siège social de Paris">
-                    <input class="modal-input form-control" id="g2" type="text" name="g2" placeholder="Groupement n°2, example: Comptabilité">
-                    <input class="modal-input form-control" id="g3" type="text" name="g3" placeholder="Groupement n°3, example: Gestion d'urgences">
-                    <input class="modal-input form-control" id="g4" type="text" name="g4" placeholder="Groupement n°4, example: Groupe nocturne">
-                    <input class="modal-input form-control" id="g5" type="text" name="g5" placeholder="Groupement n°5, example: Groupe nocture n°4">
-                    <input class="modal-input form-control" id="g6" type="text" name="g6" placeholder="Groupement n°6, example: Bureau n°407">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <small class="modal-small form-text text-muted">Les champs marqués d'un * sont obligatoires</small>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                  <button id="submitmodal" onclick="submitmodal();" type="button" class="btn btn-primary">Créer le compte</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="formContent">
-            <div class="flexrow">
-              <div id="contact"></div>
-              <div class="sendcontent">
-                <div class="flexcolumn">
-                  <div class="sendheader">
-                      <div class="input-group">
-                        <input id="dest" type="text" class="form-control dest" name="to" readonly placeholder="Destinataires..">
-                        <input id="password" type="hidden" name="password" value="<%= password %>">
-                        <div class="input-group-append">
-                          <button id="send" type="button" onclick="send();" class="btn btn-outline-primary sendbutton" name="submit">Envoyer &nbsp; <i class="fas fa-paper-plane"></i></button>
+                    <div class="sendheader">
+                        <div class="input-group">
+                          <input id="dest" type="text" class="form-control dest" name="to" readonly placeholder="Destinataires..">
+                          <input id="password" type="hidden" name="password" value="<%= password %>">
+                          <div class="input-group-append">
+                            <button id="send" type="button" onclick="send();" class="btn btn-outline-primary sendbutton" name="submit">Envoyer &nbsp; <i class="fas fa-paper-plane"></i></button>
+                          </div>
                         </div>
-                      </div>
-                  </div>
-                  <div class="sendbody">
-                    <textarea id="message" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                    </div>
+                    <div class="sendbody">
+                      <textarea id="message" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="page" id="p2">
-        <div class="wrapper">
-          <div class="formContent">
-            <div class="flexrow">
-              <div id="messagelist" class="messages"></div>
-              <div class="sendcontent">
+        <div class="page" id="p2">
+          <div class="wrapper">
+            <div class="formContent">
+              <div class="flexrow">
+                <div id="messagelist" class="messages"></div>
+                <div class="sendcontent">
+                  <div class="flexcolumn">
+                    <div class="sendheader">
+                      <input id="messagedest" type="text" class="form-control dest" name="to" placeholder="Destinataires..">
+                    </div>
+                    <div class="sendbody">
+                      <textarea id="messagebody" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                    </div>
+                    <div class="sendbody">
+                      <textarea id="commentaire" placeholder="Commentaire" class="message" rows="10" name="message"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if(rank >= 2) { %>
+        <div class="page" id="p3">
+          <div class="wrapper">
+            <div class="formContent">
+              <div class="flexrow">
                 <div class="flexcolumn">
-                  <div class="sendheader">
-                    <input id="messagedest" type="text" class="form-control dest" name="to" placeholder="Destinataires..">
+                  <div class="group-header">
+                    Catégories
                   </div>
-                  <div class="sendbody">
-                    <textarea id="messagebody" placeholder="Message" class="message" rows="10" name="message"></textarea>
+                  <div class="flexcolumn group-body">
+                    <div>
+                      Groupement n°1:<input id="inputg1" type="text" class="form-control group-item" name="g1">
+                    </div>
+                    <div>
+                      Groupement n°2:<input id="inputg2" type="text" class="form-control group-item" name="g2">
+                    </div>
+                    <div>
+                      Groupement n°3:<input id="inputg3" type="text" class="form-control group-item" name="g3">
+                    </div>
+                    <div>
+                      Groupement n°4:<input id="inputg4" type="text" class="form-control group-item" name="g4">
+                    </div>
+                    <div>
+                      Groupement n°5:<input id="inputg5" type="text" class="form-control group-item" name="g5">
+                    </div>
+                    <div>
+                      Groupement n°6:<input id="inputg6" type="text" class="form-control group-item" name="g6">
+                    </div>
                   </div>
-                  <div class="sendbody">
-                    <textarea id="commentaire" placeholder="Commentaire" class="message" rows="10" name="message"></textarea>
-                  </div>
+                </div>
+                <div class="flexcolumn">
+                    <div class="group-header">
+                      Sécurité
+                    </div>
+                    <div class="flexcolumn group-body">
+                      <div style="width: 316.28px">
+                        Adresse MAC: <input id="inputmac" style="margin-left: 27px;" type="text" class="form-control group-item" name="iistrlezkdekf">
+                      </div>
+                      <div style="width: 316.28px">
+                        Clé d'activation: <input id="inputkey" style="margin-left: 16px;" type="text" class="form-control group-item" name="dkejfkthotjrr">
+                      </div>
+                      <div style="width: 316.28px">
+                        Sécurité: <button id="inputsec" style="margin-left: 58px;" type="button" class="btn btn-secondary group-item">Pas d'information</button>
+                      </div>
+                    </div>
+                    <button id="save" style="margin-top: 100px;" type="button" class="btn btn-secondary group-item">Enregistrer</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <% } %>
+      <% if(rank >= 2) { %>
       </div>
+      <% } %>
     </div>
   </div>
 
 <% include static/footer.html %>
+<% if(rank >= 2) { %>
+  <% include static/admin_footer.html %>
+<% } %>
 </body>
 </html>

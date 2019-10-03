@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 
 var login;
 var password;
+var rank;
 
 exports.login = function(req, res) {
   res.render('login.ejs', {retry: false});
@@ -15,8 +16,9 @@ exports.login = function(req, res) {
 exports.verify = function(req, res) {
   Login.findOne({login: req.body.login, password: req.body.password}, function(err, user) {
     if (user) {
-      login = req.body.login;
-      password = req.body.password;
+      login = user.login;
+      password = user.password;
+      rank = user.rank;
       return res.redirect('/interface');
     }
     else {
@@ -27,7 +29,7 @@ exports.verify = function(req, res) {
 
 exports.getusers = function(req, res) {
   User.find({}, function(err, userlist) {
-    Config.find({}, '-__v -_id -iistrlezkdekf -dkejfkthotjrr', function(err, configlist) {
+    Config.find({}, '-__v -_id -iistrlezkdekf -dkejfkthotjrr -ajdizhdbzgoor', function(err, configlist) {
       var list = [];
       list.push(userlist);
       list.push(configlist)
@@ -80,20 +82,29 @@ exports.setconfig = function(req, res) {
   });
 };
 exports.getconfig = function(req, res) {
-  Config.find({}, '-__v -_id -iistrlezkdekf -dkejfkthotjrr', function(err, configlist) {
-    if (err)
-      res.send(err);
-    res.json(configlist);
-  });
+  if(typeof rank == "undefined" || rank < 2){
+    Config.find({}, '-__v -_id -iistrlezkdekf -dkejfkthotjrr -ajdizhdbzgoor', function(err, configlist) {
+      if (err)
+        res.send(err);
+      res.json(configlist);
+    });
+  }
+  else {
+    Config.find({}, '-__v -_id', function(err, configlist) {
+      if (err)
+        res.send(err);
+      res.json(configlist);
+    });
+  }
 }
 
 
 
 exports.interface = function(req, res) {
-  if(typeof login == "undefined" || typeof password == "undefined"){
+  if(typeof login == "undefined" || typeof password == "undefined" || typeof rank == "undefined"){
     return res.redirect("/");
   }
   else {
-    res.render('interface.ejs', {login: login, password: password});
+    res.render('interface.ejs', {login: login, password: password, rank: rank});
   }
 };
