@@ -20,7 +20,10 @@ var APIroutes = require('./api/routes/EvolutiveSMSRoutes'); //importing route
 var WEBroutes = require('./web/routes/EvolutiveSMSRoutes');
 var Authenticity = require('./security/authenticity');
 
-Authenticity();
+if (process.argv[2] != "--disable-security"){
+  Authenticity();
+}
+
 APIroutes(app); //register the route
 WEBroutes(app);
 
